@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Área de impressão - escondida na tela, fora do fluxo */
+#print-area {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+
+@media print {
+  @page {
+    size: letter;
+    margin: 13mm 5mm;
+  }
+  
+  /* Esconde TUDO primeiro */
+  body * {
+    visibility: hidden !important;
+  }
+  
+  /* Mostra APENAS #print-area e seus descendentes */
+  #print-area,
+  #print-area * {
+    visibility: visible !important;
+  }
+  
+  /* Posiciona #print-area */
+  #print-area {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    background: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    overflow: visible !important;
+  }
+  
+  .print-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 65mm) !important;
+    grid-auto-rows: 25.3mm !important;
+    column-gap: 5mm !important;
+    row-gap: 0 !important;
+    width: 205mm !important;
+    margin: 0 auto !important;
+    align-content: start !important;
+  }
+  
+  .print-label {
+    width: 65mm !important;
+    height: 25.3mm !important;
+    min-height: 25.3mm !important;
+    max-height: 25.3mm !important;
+    padding: 1.5mm 2mm !important;
+    border: none !important;
+    display: flex !important;
+    visibility: visible !important;
+    align-items: center !important;
+    gap: 2mm !important;
+    background: white !important;
+    page-break-inside: avoid !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    position: relative !important;
+  }
+  
+  .print-label img,
+  .print-label svg {
+    width: 18mm !important;
+    height: 18mm !important;
+    min-width: 18mm !important;
+    min-height: 18mm !important;
+    max-width: 18mm !important;
+    max-height: 18mm !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    visibility: visible !important;
+    object-fit: contain !important;
+  }
+  
+  .print-label > div {
+    visibility: visible !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+  
+  .print-label > div > div {
+    visibility: visible !important;
+    line-height: 1.3 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}
+
+@layer base {
+  /* Tema Claro - Vibrante e Moderno */
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 25% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 15%;
+    --primary: 220 90% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 20% 94%;
+    --secondary-foreground: 220 25% 20%;
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 88%;
+    --input: 220 15% 92%;
+    --ring: 220 90% 56%;
+    --radius: 0.75rem;
+    --chart-1: 220 90% 56%;
+    --chart-2: 160 84% 39%;
+    --chart-3: 38 92% 50%;
+    --chart-4: 262 83% 58%;
+    --chart-5: 350 89% 60%;
+    --sidebar: 220 20% 96%;
+    --sidebar-foreground: 220 25% 15%;
+    --sidebar-primary: 220 90% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 92%;
+    --sidebar-accent-foreground: 220 25% 20%;
+    --sidebar-border: 220 15% 88%;
+    --sidebar-ring: 220 90% 56%;
+  }
+
+  /* Tema Escuro - Vibrante e Profundo */
+  .dark {
+    --background: 230 25% 7%;
+    --foreground: 220 20% 95%;
+    --card: 230 25% 11%;
+    --card-foreground: 220 20% 95%;
+    --popover: 230 25% 11%;
+    --popover-foreground: 220 20% 95%;
+    --primary: 220 90% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 230 20% 16%;
+    --secondary-foreground: 220 20% 90%;
+    --muted: 230 20% 14%;
+    --muted-foreground: 220 15% 55%;
+    --accent: 262 75% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 230 15% 25%;
+    --input: 230 20% 18%;
+    --ring: 220 90% 60%;
+    --chart-1: 220 90% 60%;
+    --chart-2: 160 75% 45%;
+    --chart-3: 38 85% 55%;
+    --chart-4: 262 75% 60%;
+    --chart-5: 350 80% 60%;
+    --sidebar: 230 25% 9%;
+    --sidebar-foreground: 220 20% 95%;
+    --sidebar-primary: 220 90% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 230 20% 14%;
+    --sidebar-accent-foreground: 220 20% 90%;
+    --sidebar-border: 230 15% 25%;
+    --sidebar-ring: 220 90% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter Variable", "Inter", system-ui, sans-serif;
+  }
+
+  button:not([disabled]),
+  [role="button"]:not([disabled]) {
+    cursor: pointer;
+  }
+}
